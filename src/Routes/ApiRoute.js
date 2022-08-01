@@ -1,10 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { Carro } = require('../Models/Carro')
+const { Carro } = require('../Models')
 
-router.get('/', async (req, res) => {
-  const all = await Carro.findAll()
-  return res.json(all)
+router.post('/', async (req, res) => {
+  const data = req.body
+  console.log(data)
+  const carro = await Carro.create(data)
+  console.log(carro)
+  return res.json({success: true, message: 'Carro adicionado com sucesso'})
 })
 
 module.exports = router
